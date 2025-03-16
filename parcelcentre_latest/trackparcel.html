@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Search - SME Bank Parcel Centre</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #ffffff;
+        }
+        .navbar {
+            background-color: #363535;
+        }
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #FF6600 !important; /* Bright font color */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .header {
+            background-color: #FF6600;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .search-section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #363535;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 40px;
+            color: #FF6600;
+        }
+        .footer .footer-content {
+            color: #FF6600;
+        }
+        .btn-primary {
+            background-color: #FF6600;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e65c00;
+        }
+        .link {
+            color: #FF6600;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#" style="color: #F8F3EA;">SME Bank Parcel Centre</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="search-section">
+            <h2 class="mb-4">Search for Student Parcel</h2>
+            <form id="searchForm">
+                <div class="form-group">
+                    <label for="trackingNo">Tracking Number</label>
+                    <input type="text" class="form-control" id="trackingNo" name="trackingNo" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </form>
+            <div id="searchResults" class="mt-4">
+                <!-- Search results will be displayed here -->
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-5">
+        <div class="footer-content">
+            <p>&copy; 2024 Parcel Centre. All Rights Reserved.</p>
+            <p>Contact us at <a href="mailto:info@parcelcentre.com" class="link">info@parcelcentre.com</a></p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                var trackingNo = $('#trackingNo').val();
+                // You would replace the URL below with your server-side search endpoint
+                $.ajax({
+                    url: 'searchParcel.php',
+                    type: 'GET',
+                    data: { trackingNo: trackingNo },
+                    success: function(response) {
+                        $('#searchResults').html(response);
+                    },
+                    error: function() {
+                        $('#searchResults').html('<p class="text-danger">An error occurred while searching for the parcel. Please try again later.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
